@@ -1,87 +1,32 @@
-import time                     #import time function
+import time  # import time function
 
-print(time.localtime().tm_yday)  #this will give an int value to todays date.
+int_year = int(input("What year would you like to enter: "))    #get integer value of year required
 
-int_day = int(input("What date would you like to enter: "))  #need the int() otherwise it will be input as a string
-int_month = input("What month would you like to enter: ")    #keeping this one as a string for now
+year_Value = time.localtime().tm_year - int_year                #subtract year entered from current year
+year_in_days = year_Value * 365                                 #multiply result by 365
 
-
-
-def calculateTime():                                            #function to calculate time
-    if int_month == '1':                                        #if statement for Januray
-        print("Days since January," , int_day, " is...")        #opening statement
-        print(time.localtime().tm_yday - (int_day + 31))        #print days
-    elif int_month == '2':
-        print("Days since February,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:                   #Inbedded if statement for leap years
-            print(time.localtime().tm_yday - (int_day + 60))
-        else:                                                   #Else statement for non-leap years
-            print(time.localtime().tm_yday - (int_day + 59))
-    elif int_month == '3':
-        print("Days since March,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 91))
-        else:
-            print(time.localtime().tm_yday - (int_day + 90))
-    elif int_month == '4':
-        print("Days since April,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 90))
-        else:
-            print(time.localtime().tm_yday - (int_day + 89))
-    elif int_month == '5':
-        print("Days since May,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 121))
-        else:
-            print(time.localtime().tm_yday - (int_day + 120))
-    elif int_month == '6':
-        print("Days since June,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 151))
-        else:
-            print(time.localtime().tm_yday - (int_day + 150))
-    elif int_month == '7':
-        print("Days since July,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 182))
-        else:
-            print(time.localtime().tm_yday - (int_day + 181))
-    elif int_month == '8':
-        print("Days since August,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 213))
-        else:
-            print(time.localtime().tm_yday - (int_day + 212))
-    elif int_month == '9':
-        print("Days since September,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 243))
-        else:
-            print(time.localtime().tm_yday - (int_day + 242))
-    elif int_month == '10':
-        print("Days since October,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 274))
-        else:
-            print(time.localtime().tm_yday - (int_day + 273))
-    elif int_month == '11':
-        print("Days since November,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 304))
-        else:
-            print(time.localtime().tm_yday - (int_day + 303))
-    elif int_month == '12':
-        print("Days since December,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
-            print(time.localtime().tm_yday - (int_day + 335))
-        else:
-            print(time.localtime().tm_yday - (int_day + 334))
-    else:
-        print("Not the first 2 months")
-        print(int_month)
+for x in range(int_year, time.localtime().tm_year):             #for loop with range of year selected and current year
+    if x % 4 == 0:                                              #if its a leap year...
+        year_in_days += 1                                       #add an extra year
 
 
+month_list = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] #starting at 0 so that 1 is Jan, 2 is Feb, etc
+
+int_month = int(input("Enter a number for the month: "))        #Take in int value for month
 
 
-calculateTime()
+month_in_days = 0
+for x in range(1, int_month):                                   #prints off the months from January and the month prior. The current month is left out.
+    month_in_days += month_list[x]                              #adds value of months to month_in_days
+
+
+current_day = time.localtime().tm_yday                          #Current number of days per Julian Calendar. Days since Jan 1st.
+
+
+int_day = int(input("Enter a day value: "))                     #Get an int value for day in the month
+
+total_value = time.localtime().tm_yday - month_in_days - int_day + year_in_days
+                                                                #Current day minus previous months (in days) minus day selected add years total
+
+print("Total number of days is: ", total_value)                        #Output of all days since selected time
+
