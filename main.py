@@ -1,21 +1,21 @@
-import time
+import time                     #import time function
 
 print(time.localtime().tm_yday)  #this will give an int value to todays date.
 
 int_day = int(input("What date would you like to enter: "))  #need the int() otherwise it will be input as a string
-int_month = input("What month would you like to enter: ")
+int_month = input("What month would you like to enter: ")    #keeping this one as a string for now
 
 
 
-def calculateTime():
-    if int_month == '1':
-        print("Days since January," , int_day, " is...")
-        print(time.localtime().tm_yday - (int_day + 31))
+def calculateTime():                                            #function to calculate time
+    if int_month == '1':                                        #if statement for Januray
+        print("Days since January," , int_day, " is...")        #opening statement
+        print(time.localtime().tm_yday - (int_day + 31))        #print days
     elif int_month == '2':
         print("Days since February,", int_day, " is...")
-        if time.localtime().tm_year % 4 == 0:
+        if time.localtime().tm_year % 4 == 0:                   #Inbedded if statement for leap years
             print(time.localtime().tm_yday - (int_day + 60))
-        else:
+        else:                                                   #Else statement for non-leap years
             print(time.localtime().tm_yday - (int_day + 59))
     elif int_month == '3':
         print("Days since March,", int_day, " is...")
@@ -85,4 +85,3 @@ def calculateTime():
 
 
 calculateTime()
-print("Print")
