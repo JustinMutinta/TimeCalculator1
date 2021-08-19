@@ -28,5 +28,5 @@ int_day = int(input("Enter a day value: "))                     #Get an int valu
 total_value = time.localtime().tm_yday - month_in_days - int_day + year_in_days
                                                                 #Current day minus previous months (in days) minus day selected add years total
 
-print("Total number of days is: ", total_value)                        #Output of all days
+print("Total number of days is: ", total_value)                        #Output of all days since selected time
 
